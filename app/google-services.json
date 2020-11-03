@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "502251480513",
+    "firebase_url": "https://donationapp-72b6f.firebaseio.com",
+    "project_id": "donationapp-72b6f",
+    "storage_bucket": "donationapp-72b6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502251480513:android:2a6af7d74c6247dbf1fb40",
+        "android_client_info": {
+          "package_name": "com.akshatsharma.donationapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502251480513-l4j2mdptei6rcrlg3vnnnbr7lj8ab3d2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkfRT9_Lf-AbQjL9-fxbh9ifijxfaKZFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502251480513-l4j2mdptei6rcrlg3vnnnbr7lj8ab3d2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
