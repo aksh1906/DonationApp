@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DonationApp">
-        <activity android:name=".AuctionDetailsActivity"></activity>
+        <activity android:name=".DisplayAllDonationsActivity"></activity>
+        <activity android:name=".AuctionDetailsActivity" />
         <activity android:name=".DonationDetailsActivity" />
         <activity android:name=".AddAuctionActivity" />
         <activity android:name=".AddDonationActivity" />

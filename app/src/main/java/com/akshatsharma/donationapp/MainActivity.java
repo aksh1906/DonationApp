@@ -53,4 +53,8 @@ public class MainActivity extends AppCompatActivity {
     public void gotoAddDonation(View view) {
         startActivity(new Intent(getApplicationContext(), AddDonationActivity.class));
     }
+
+    public void display_all_donations(View view) {
+        startActivity(new Intent(getApplicationContext(), DisplayAllDonationsActivity.class));
+    }
 }

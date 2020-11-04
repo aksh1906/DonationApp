@@ -83,7 +83,7 @@ public class AddDonationActivity extends AppCompatActivity {
                 itemTitle = mDonationTitle.getText().toString();
                 itemDescription = mDonationDescription.getText().toString();
 
-                StorageReference fileReference = storageReference.child("donated_item.jpg");
+                StorageReference fileReference = storageReference.child("donated_items/" + fAuth.getCurrentUser().getUid() + "/" + itemTitle + ".jpg");
                 fileReference.putFile(uploadImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
@@ -96,6 +96,7 @@ public class AddDonationActivity extends AppCompatActivity {
                                 donation.put("title", itemTitle);
                                 donation.put("description", itemDescription);
                                 donation.put("image_url", downloadImageUri);
+                                donation.put("donated_status", 0);
 
                                 fStore.collection("donated_items").add(donation).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
