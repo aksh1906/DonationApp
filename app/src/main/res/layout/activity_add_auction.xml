@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E5E5E5"
+    tools:context=".AddAuctionActivity">
+
+    <Button
+        android:id="@+id/addAuctionImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#112c54"
+        android:text="Add Image"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auctionItemImageView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/auctionTitleEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="Add Title"
+        android:inputType="textPersonName"
+        android:padding="12dp"
+        android:textColorHint="#4C4949"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAuctionImageButton"
+        app:layout_constraintVertical_bias="0.060000002" />
+
+    <ImageView
+        android:id="@+id/auctionItemImageView"
+        android:layout_width="218dp"
+        android:layout_height="231dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.110000014"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <EditText
+        android:id="@+id/auctionDescriptionEditText"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Add Description"
+        android:inputType="textMultiLine"
+        android:padding="12dp"
+        android:textColorHint="#4C4949"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auctionTitleEditText"
+        app:layout_constraintVertical_bias="0.06999999" />
+
+    <Button
+        android:id="@+id/submitAuctionButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:backgroundTint="#112c54"
+        android:text="Submit Auction"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auctionDescriptionEditText"
+        app:layout_constraintVertical_bias="0.79" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="Enter Bid Start Amount"
+        android:inputType="number"
+        android:padding="12dp"
+        android:textColorHint="#4C4949"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auctionDescriptionEditText"
+        app:layout_constraintVertical_bias="0.100000024" />
+
+    <Button
+        android:id="@+id/auctionStartDateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="Start Date"
+        android:textColor="#112C54"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintVertical_bias="0.24000001" />
+
+    <Button
+        android:id="@+id/auctionEndDateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="End Date"
+        android:textColor="#112c54"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintVertical_bias="0.24000001" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
