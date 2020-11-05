@@ -26,4 +26,5 @@ public class DonatedItem {
     public String getImage_url() {
         return image_url;
     }
+
 }

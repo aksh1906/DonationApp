@@ -43,9 +43,10 @@ public class AddDonationActivity extends AppCompatActivity {
     FirebaseAuth fAuth;
     String itemTitle, itemDescription, donorID;
     StorageReference storageReference;
+    DocumentReference userReference;
     ProgressBar mProgressBar;
     Uri uploadImageUri;
-    String downloadImageUri;
+    String downloadImageUri, donorName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class AddDonationActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
 
         donorID = fAuth.getCurrentUser().getUid();
+        getUserFullName();
 
         mAddImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,16 +95,19 @@ public class AddDonationActivity extends AppCompatActivity {
                                 downloadImageUri = uri.toString();
                                 Map<String, Object> donation = new HashMap<>();
                                 donation.put("donor_id", donorID);
+                                donation.put("donor_name", donorName);
                                 donation.put("title", itemTitle);
                                 donation.put("description", itemDescription);
                                 donation.put("image_url", downloadImageUri);
                                 donation.put("donated_status", 0);
+
 
                                 fStore.collection("donated_items").add(donation).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
                                         Toast.makeText(AddDonationActivity.this, "Item Successfully added for donation.", Toast.LENGTH_SHORT).show();
                                         Log.d("", "Document snapshot added with id " + documentReference.getId());
+                                        finish();
                                     }
                                 });
                             }
@@ -125,6 +130,16 @@ public class AddDonationActivity extends AppCompatActivity {
                 mImageView.setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    private void getUserFullName() {
+        userReference = fStore.collection("users").document(donorID);
+        userReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                donorName = documentSnapshot.getString("fullname");
+            }
+        });
     }
 
 }

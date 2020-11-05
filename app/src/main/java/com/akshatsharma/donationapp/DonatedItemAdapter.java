@@ -7,12 +7,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class DonatedItemAdapter extends FirestoreRecyclerAdapter<DonatedItem, DonatedItemAdapter.DonatedItemHolder> {
+    private OnItemClickListener listener;
 
     public DonatedItemAdapter(@NonNull FirestoreRecyclerOptions<DonatedItem> options) {
         super(options);
@@ -41,6 +43,24 @@ public class DonatedItemAdapter extends FirestoreRecyclerAdapter<DonatedItem, Do
             mDonatedItemTitle = itemView.findViewById(R.id.donationTitleTextView);
             mDonatedItemDescription = itemView.findViewById(R.id.donationDescriptionTextView);
             mItemImageView = itemView.findViewById(R.id.itemImageView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION && listener != null) {
+                        listener.onItemClick(getSnapshots().getSnapshot(position), position);
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(DocumentSnapshot documentSnapshot, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }
