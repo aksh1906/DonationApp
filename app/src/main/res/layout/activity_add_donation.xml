@@ -7,6 +7,10 @@
     android:background="#E5E5E5"
     tools:context=".AddDonationActivity">
 
+    <include
+        android:id="@+id/addDonationToolbar"
+        layout="@layout/toolbar" />
+
     <Button
         android:id="@+id/addDonationImageButton"
         android:layout_width="wrap_content"

@@ -6,4 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".AuctionDetailsActivity">
 
+    <include
+        android:id="@+id/auctionDetailsToolbar"
+        layout="@layout/toolbar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

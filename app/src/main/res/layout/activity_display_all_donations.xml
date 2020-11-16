@@ -7,6 +7,10 @@
     android:background="#e5e5e5"
     tools:context=".DisplayAllDonationsActivity">
 
+    <include
+        android:id="@+id/displayAllDonationsToolbar"
+        layout="@layout/toolbar" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/donationRecyclerView"
         android:layout_width="match_parent"

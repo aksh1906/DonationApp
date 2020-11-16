@@ -7,6 +7,10 @@
     android:background="#e5e5e5"
     tools:context=".ViewDonationActivity">
 
+    <include
+        android:id="@+id/viewDonationToolbar"
+        layout="@layout/toolbar" />
+
 
     <Button
         android:id="@+id/claimDonationButton"
@@ -32,7 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewDonationToolbar"
         app:layout_constraintVertical_bias="0.110000014"
         tools:srcCompat="@tools:sample/avatars" />
 

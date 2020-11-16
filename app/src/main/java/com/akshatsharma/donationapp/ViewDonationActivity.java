@@ -49,7 +49,7 @@ public class ViewDonationActivity extends AppCompatActivity {
                 if(documentSnapshot.exists()) {
                     mDonatedItemTitle.setText(documentSnapshot.getString("title"));
                     mDonatedItemDescription.setText(documentSnapshot.getString("description"));
-                    mDonorName.append(documentSnapshot.getString("donor_name"));
+//                    mDonorName.append(documentSnapshot.getString("donor_name"));
                     image_url = documentSnapshot.getString("image_url");
                     Picasso.get().load(image_url).into(mDonatedItemImageView);
 
