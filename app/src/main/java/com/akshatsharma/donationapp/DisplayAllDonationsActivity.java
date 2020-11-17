@@ -16,7 +16,7 @@ import com.google.firebase.firestore.Query;
 
 import java.io.Serializable;
 
-public class DisplayAllDonationsActivity extends AppCompatActivity implements Serializable {
+public class DisplayAllDonationsActivity extends AppCompatActivity {
     private FirebaseFirestore fStore;
     private CollectionReference reference;
     private DonatedItemAdapter adapter;
@@ -50,7 +50,6 @@ public class DisplayAllDonationsActivity extends AppCompatActivity implements Se
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
                 DonatedItem donatedItem = documentSnapshot.toObject(DonatedItem.class);
                 String path = documentSnapshot.getReference().getPath();
-                Toast.makeText(DisplayAllDonationsActivity.this, "clicked", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(DisplayAllDonationsActivity.this, ViewDonationActivity.class);
                 intent.putExtra("donated_item_id", path);
                 startActivity(intent);

@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
@@ -100,6 +101,7 @@ public class AddDonationActivity extends AppCompatActivity {
                                 donation.put("description", itemDescription);
                                 donation.put("image_url", downloadImageUri);
                                 donation.put("donated_status", 0);
+                                donation.put("timestamp", FieldValue.serverTimestamp());
 
 
                                 fStore.collection("donated_items").add(donation).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
