@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -18,17 +19,22 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class ViewDonationActivity extends AppCompatActivity {
-    TextView mDonatedItemTitle, mDonatedItemDescription, mDonorName;
+    TextView mDonatedItemTitle, mDonatedItemDescription, mDonorName, mDonationDate;
     ImageView mDonatedItemImageView;
     Button mClaimItemButton;
     String image_url;
     FirebaseFirestore fStore;
     DocumentReference reference;
     FirebaseAuth fAuth;
+    Date donationDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,7 @@ public class ViewDonationActivity extends AppCompatActivity {
         mDonatedItemTitle = findViewById(R.id.donatedItemTitleTextView);
         mDonatedItemDescription = findViewById(R.id.donatedItemDescriptionTextView);
         mDonorName = findViewById(R.id.donorNameTextView);
+        mDonationDate = findViewById(R.id.itemDateTextView);
 
         mDonatedItemImageView = findViewById(R.id.donatedItemImageImageView);
 
@@ -54,7 +61,12 @@ public class ViewDonationActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()) {
+                    Timestamp timestamp = (Timestamp) documentSnapshot.getData().get("timestamp");
+                    donationDate = timestamp.toDate();
+                    DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM, Locale.ENGLISH);
+                    String dateString = dateFormat.format(donationDate);
                     mDonatedItemTitle.setText(documentSnapshot.getString("title"));
+                    mDonationDate.append(dateString);
                     mDonatedItemDescription.setText(documentSnapshot.getString("description"));
                     mDonorName.append(documentSnapshot.getString("donor_name"));
                     image_url = documentSnapshot.getString("image_url");

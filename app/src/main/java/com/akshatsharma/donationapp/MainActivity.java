@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.myDonationsMenuItem) {
-            // add
+            startActivity(new Intent(getApplicationContext(), MyDonationsActivity.class));
         } else if(item.getItemId() == R.id.myAuctionsMenuItem) {
             // add
         } else if(item.getItemId() == R.id.viewAllDonationsMenuItem) {
