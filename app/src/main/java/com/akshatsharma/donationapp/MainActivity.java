@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -35,11 +36,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle toggle;
     FloatingActionButton mAddDonationFab, mAddAuctionFab;
     ExtendedFloatingActionButton mAddFab;
-    TextView mAddDonationTextView, mAddAuctionTextView, mNameTextView, mShowAllTextView;
+    TextView mAddDonationTextView, mAddAuctionTextView, mNameTextView, mShowAllTextView, mEmailTextView;
     Boolean allFabsVisible;
     NavigationView navigationView;
     FirebaseFirestore fStore;
-    DocumentReference reference;
+    FirebaseAuth fAuth;
+    DocumentReference documentReference;
     CollectionReference collectionReference;
     HomePageDonatedItemAdapter adapter;
 
@@ -52,15 +54,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          setSupportActionBar(toolbar);
 
          fStore = FirebaseFirestore.getInstance();
-//         reference = fStore.document()
-        collectionReference = fStore.collection("donated_items");
+         fAuth = FirebaseAuth.getInstance();
+         collectionReference = fStore.collection("donated_items");
 
          navigationView = findViewById(R.id.mainActivityNavigationView);
          navigationView.setNavigationItemSelectedListener(this);
 
          mNameTextView = findViewById(R.id.drawerHeaderNameTextView);
+         mEmailTextView = findViewById(R.id.drawerHeaderEmailTextView);
          mShowAllTextView = findViewById(R.id.showAllDonationsTextView);
-//         mNameTextView.setText(firestore.);
+
+//        String userId = fAuth.getCurrentUser().getUid();
+//        documentReference = fStore.collection("users").document(userId);
+//        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                if(documentSnapshot.exists()) {
+//                    mNameTextView.setText(documentSnapshot.getString("fullname"));
+//                    mEmailTextView.setText(documentSnapshot.getString("email"));
+//                }
+//            }
+//        });
 
          mAddFab = findViewById(R.id.addFab);
          mAddAuctionFab = findViewById(R.id.addAuctionFab);
@@ -95,6 +109,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                      mAddFab.shrink();
                      allFabsVisible = false;
                  }
+             }
+         });
+
+         mAddAuctionFab.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 startActivity(new Intent(getApplicationContext(), AddAuctionActivity.class));
              }
          });
 

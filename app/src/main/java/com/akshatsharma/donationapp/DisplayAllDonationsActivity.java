@@ -1,11 +1,13 @@
 package com.akshatsharma.donationapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -20,11 +22,25 @@ public class DisplayAllDonationsActivity extends AppCompatActivity {
     private FirebaseFirestore fStore;
     private CollectionReference reference;
     private DonatedItemAdapter adapter;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_all_donations);
+
+        toolbar = findViewById(R.id.displayAllDonationsToolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("All Donations");
+
+
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         fStore = FirebaseFirestore.getInstance();
         reference = fStore.collection("donated_items");
@@ -33,7 +49,7 @@ public class DisplayAllDonationsActivity extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-        Query query = reference.orderBy("title", Query.Direction.DESCENDING);
+        Query query = reference.whereEqualTo("donated_status", 0).orderBy("title", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<DonatedItem> options = new FirestoreRecyclerOptions.Builder<DonatedItem>()
                 .setQuery(query, DonatedItem.class)
                 .build();

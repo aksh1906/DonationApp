@@ -8,7 +8,7 @@
     tools:context=".MyDonationsActivity">
 
     <include
-        android:id="@+id/addDonationToolbar"
+        android:id="@+id/editDonationToolbar"
         layout="@layout/toolbar" />
 
     <Button

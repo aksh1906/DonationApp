@@ -3,6 +3,7 @@ package com.akshatsharma.donationapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -41,11 +42,25 @@ public class DonationDetailsActivity extends AppCompatActivity {
     Uri uploadImageUri;
     String downloadImageUri;
     FirebaseAuth fAuth;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_details);
+
+        toolbar = findViewById(R.id.editDonationToolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Donation Details");
+
+
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         mDonatedItemTitle = findViewById(R.id.editDonationTitleEditText);
         mDonatedItemDescription = findViewById(R.id.editDonationDescriptionEditText);
