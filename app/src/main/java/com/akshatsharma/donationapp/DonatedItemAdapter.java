@@ -24,6 +24,12 @@ public class DonatedItemAdapter extends FirestoreRecyclerAdapter<DonatedItem, Do
     protected void onBindViewHolder(@NonNull DonatedItemHolder holder, int position, @NonNull DonatedItem model) {
         holder.mDonatedItemTitle.setText(model.getTitle());
         holder.mDonatedItemDescription.setText((model.getDescription()));
+        holder.mDonationStatus.setText("Claimed");
+        if(model.getDonated_status() == 1) {
+            holder.mDonationStatus.setVisibility(View.VISIBLE);
+        } else {
+            holder.mDonationStatus.setVisibility(View.INVISIBLE);
+        }
         Picasso.get().load(model.getImage_url()).into(holder.mItemImageView);
     }
 
@@ -35,13 +41,14 @@ public class DonatedItemAdapter extends FirestoreRecyclerAdapter<DonatedItem, Do
     }
 
     class DonatedItemHolder extends RecyclerView.ViewHolder {
-        TextView mDonatedItemTitle, mDonatedItemDescription;
+        TextView mDonatedItemTitle, mDonatedItemDescription, mDonationStatus;
         ImageView mItemImageView;
         
         public DonatedItemHolder(@NonNull View itemView) {
             super(itemView);
             mDonatedItemTitle = itemView.findViewById(R.id.donationTitleTextView);
             mDonatedItemDescription = itemView.findViewById(R.id.donationDescriptionTextView);
+            mDonationStatus = itemView.findViewById(R.id.donatedStatusTextView);
             mItemImageView = itemView.findViewById(R.id.itemImageView);
 
             itemView.setOnClickListener(new View.OnClickListener() {

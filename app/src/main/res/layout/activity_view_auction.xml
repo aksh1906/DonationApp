@@ -4,113 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E5E5E5"
-    tools:context=".MyDonationsActivity">
+    android:background="#e5e5e5"
+    tools:context=".ViewAuctionActivity">
 
     <include
-        android:id="@+id/editDonationToolbar"
+        android:id="@+id/viewAuctionToolbar"
         layout="@layout/toolbar" />
 
     <Button
-        android:id="@+id/checkClaimsButton"
+        android:id="@+id/bidForItemButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="48dp"
         android:backgroundTint="#112c54"
-        android:text="Check Donation Claims"
+        android:text="Make a Bid"
         android:textColor="#FFFFFF"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editDonationToolbar"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/editDonationImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#112c54"
-        android:text="Change Image"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myDonatedItemImageView"
-        app:layout_constraintVertical_bias="0.13" />
-
-    <EditText
-        android:id="@+id/editDonationTitleEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="48dp"
-        android:background="#FFFFFF"
-        android:ems="10"
-        android:hint="Add Title"
-        android:inputType="textPersonName"
-        android:padding="12dp"
-        android:textColor="#000000"
-        android:textColorHint="#4C4949"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editDonationImageButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/auctionedItemDescriptionTextView"
+        app:layout_constraintVertical_bias="0.3" />
 
     <ImageView
-        android:id="@+id/myDonatedItemImageView"
+        android:id="@+id/auctionedItemImageImageView"
         android:layout_width="218dp"
         android:layout_height="231dp"
-        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkClaimsButton"
-        app:layout_constraintVertical_bias="0.110000014"
+        app:layout_constraintTop_toBottomOf="@id/viewAuctionToolbar"
+        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <EditText
-        android:id="@+id/editDonationDescriptionEditText"
+    <TextView
+        android:id="@+id/auctionedItemDescriptionTextView"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="170dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="48dp"
-        android:background="#FFFFFF"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Add Description"
-        android:inputType="textMultiLine"
         android:padding="12dp"
+        android:text="Description"
         android:textColor="#000000"
         android:textColorHint="#4C4949"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editDonationTitleEditText"
+        app:layout_constraintTop_toBottomOf="@+id/sellerNameTextView"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/updateDonationButton"
+    <TextView
+        android:id="@+id/auctionedItemTitleTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="48dp"
-        android:backgroundTint="#112c54"
-        android:text="Update"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="20dp"
+        android:ems="10"
+        android:padding="12dp"
+        android:text="Title"
+        android:textColor="#000000"
+        android:textColorHint="#4C4949"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editDonationDescriptionEditText"
+        app:layout_constraintTop_toBottomOf="@+id/auctionedItemImageImageView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/sellerNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="48dp"
+        android:padding="12dp"
+        android:text="Seller: "
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auctionEndDateTextView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/auctionEndDateTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="48dp"
+        android:padding="12dp"
+        android:text="Ends On:"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auctionedItemTitleTextView"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

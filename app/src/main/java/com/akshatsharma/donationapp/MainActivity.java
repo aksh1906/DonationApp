@@ -36,14 +36,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle toggle;
     FloatingActionButton mAddDonationFab, mAddAuctionFab;
     ExtendedFloatingActionButton mAddFab;
-    TextView mAddDonationTextView, mAddAuctionTextView, mNameTextView, mShowAllTextView, mEmailTextView;
+    TextView mAddDonationTextView, mAddAuctionTextView, mNameTextView, mShowAllTextView, mEmailTextView, mShowAllAuctionsTextView;
     Boolean allFabsVisible;
     NavigationView navigationView;
     FirebaseFirestore fStore;
     FirebaseAuth fAuth;
     DocumentReference documentReference;
-    CollectionReference collectionReference;
+    CollectionReference collectionReference, auctionCollectionReference;
     HomePageDonatedItemAdapter adapter;
+    HomePageAuctionedItemAdapter auctionAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          fStore = FirebaseFirestore.getInstance();
          fAuth = FirebaseAuth.getInstance();
          collectionReference = fStore.collection("donated_items");
+         auctionCollectionReference = fStore.collection("auctioned_items");
 
          navigationView = findViewById(R.id.mainActivityNavigationView);
          navigationView.setNavigationItemSelectedListener(this);
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          mNameTextView = findViewById(R.id.drawerHeaderNameTextView);
          mEmailTextView = findViewById(R.id.drawerHeaderEmailTextView);
          mShowAllTextView = findViewById(R.id.showAllDonationsTextView);
+         mShowAllAuctionsTextView = findViewById(R.id.showAllAuctionsTextView);
 
 //        String userId = fAuth.getCurrentUser().getUid();
 //        documentReference = fStore.collection("users").document(userId);
@@ -141,22 +144,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        mShowAllAuctionsTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DisplayAllAuctionsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         setUpRecyclerView();
 
     }
 
     private void setUpRecyclerView() {
-        Query query = collectionReference.whereEqualTo("donated_status", 0).orderBy("timestamp", Query.Direction.DESCENDING).limit(6);
+        Query query = collectionReference.whereEqualTo("donated_status", 0)
+                .whereNotEqualTo("donor_id", fAuth.getUid())
+                .orderBy("donor_id", Query.Direction.DESCENDING)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .limit(6);
         FirestoreRecyclerOptions<DonatedItem> options = new FirestoreRecyclerOptions.Builder<DonatedItem>()
                 .setQuery(query, DonatedItem.class)
                 .build();
 
+        Query query1 = auctionCollectionReference.whereEqualTo("auctioned_status", 0)
+                .whereNotEqualTo("seller_id", fAuth.getUid())
+                .orderBy("seller_id", Query.Direction.DESCENDING)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .limit(6);
+
+        FirestoreRecyclerOptions<AuctionedItem> options2 = new FirestoreRecyclerOptions.Builder<AuctionedItem>()
+                .setQuery(query1, AuctionedItem.class)
+                .build();
+
         adapter = new HomePageDonatedItemAdapter(options);
+        auctionAdapter = new HomePageAuctionedItemAdapter(options2);
 
         RecyclerView recyclerView = findViewById(R.id.recentDonationsRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(adapter);
+
+        RecyclerView recyclerView1 = findViewById(R.id.recentAuctionsRecyclerView);
+        recyclerView1.setHasFixedSize(true);
+        recyclerView1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView1.setAdapter(auctionAdapter);
 
         adapter.setOnItemClickListener(new HomePageDonatedItemAdapter.OnItemClickListener() {
             @Override
@@ -168,24 +199,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             }
         });
+
+        auctionAdapter.setOnItemClickListener(new HomePageAuctionedItemAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                AuctionedItem auctionedItem = documentSnapshot.toObject(AuctionedItem.class);
+                String path = documentSnapshot.getReference().getPath();
+                Intent intent = new Intent(MainActivity.this, ViewAuctionActivity.class);
+                intent.putExtra("auctioned_item_id", path);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         adapter.startListening();
+        auctionAdapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         adapter.stopListening();
+        auctionAdapter.stopListening();
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
         adapter.startListening();
+        auctionAdapter.startListening();
     }
 
     @Override
@@ -193,11 +238,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(item.getItemId() == R.id.myDonationsMenuItem) {
             startActivity(new Intent(getApplicationContext(), MyDonationsActivity.class));
         } else if(item.getItemId() == R.id.myAuctionsMenuItem) {
-            // add
+            startActivity(new Intent(getApplicationContext(), MyAuctionsActivity.class));
+        } else if(item.getItemId() == R.id.claimedDonationsMenuItem) {
+            startActivity(new Intent(getApplicationContext(), ClaimedDonationsActivity.class));
+        } else if(item.getItemId() == R.id.claimedAuctionsMenuItem) {
+            startActivity(new Intent(getApplicationContext(), ClaimedAuctionsActivity.class));
         } else if(item.getItemId() == R.id.viewAllDonationsMenuItem) {
             startActivity(new Intent(getApplicationContext(), DisplayAllDonationsActivity.class));
         } else if(item.getItemId() == R.id.viewAllAuctionsMenuItem) {
-            // add
+            startActivity(new Intent(getApplicationContext(), DisplayAllAuctionsActivity.class));
         } else if(item.getItemId() == R.id.logoutMenuItem) {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));

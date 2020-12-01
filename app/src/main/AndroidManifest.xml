@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DonationApp">
-        <activity android:name=".MyDonationsActivity"></activity>
+        <activity android:name=".ClaimedAuctionsActivity"></activity>
+        <activity android:name=".ClaimedDonationsActivity" />
+        <activity android:name=".CheckDonationClaimsActivity" />
+        <activity android:name=".MyAuctionsActivity" />
+        <activity android:name=".ViewAuctionActivity" />
+        <activity android:name=".DisplayAllAuctionsActivity" />
+        <activity android:name=".MyDonationsActivity" />
         <activity android:name=".ViewDonationActivity" />
         <activity android:name=".DisplayAllDonationsActivity" />
         <activity android:name=".AuctionDetailsActivity" />

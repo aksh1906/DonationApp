@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/myDonationsMenuItem"
-        android:title="My Donations" />
-    <item
-        android:id="@+id/myAuctionsMenuItem"
-        android:title="My Auctions" />
-    <item
-        android:id="@+id/viewAllDonationsMenuItem"
-        android:title="View All Donations" />
-    <item
-        android:id="@+id/viewAllAuctionsMenuItem"
-        android:title="View All Auctions" />
-    <item
-        android:id="@+id/logoutMenuItem"
-        android:title="Log Out" />
+    <group android:id="@+id/menu_top">
+        <item
+            android:id="@+id/myDonationsMenuItem"
+            android:title="My Donations" />
+        <item
+            android:id="@+id/claimedDonationsMenuItem"
+            android:title="Claimed Donations" />
+        <item
+            android:id="@+id/viewAllDonationsMenuItem"
+            android:title="View All Donations" />
+    </group>
+
+    <group android:id="@+id/middle_menu">
+        <item
+            android:id="@+id/myAuctionsMenuItem"
+            android:title="My Auctions" />
+
+        <item
+            android:id="@+id/claimedAuctionsMenuItem"
+            android:title="Claimed Auctions" />
+
+        <item
+            android:id="@+id/viewAllAuctionsMenuItem"
+            android:title="View All Auctions" />
+    </group>
+
+    <group android:id="@+id/menu_bottom">
+        <item
+            android:id="@+id/logoutMenuItem"
+            android:title="Log Out" />
+    </group>
+
 </menu>

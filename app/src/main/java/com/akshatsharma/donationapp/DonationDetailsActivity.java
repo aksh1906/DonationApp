@@ -34,7 +34,7 @@ import java.util.Map;
 public class DonationDetailsActivity extends AppCompatActivity {
     EditText mDonatedItemTitle, mDonatedItemDescription;
     ImageView imageView;
-    Button mSubmitButton, mEditImageButton;
+    Button mSubmitButton, mEditImageButton, mCheckClaimsButton;
     String image_url;
     FirebaseFirestore fStore;
     DocumentReference reference;
@@ -67,6 +67,7 @@ public class DonationDetailsActivity extends AppCompatActivity {
         imageView = findViewById(R.id.myDonatedItemImageView);
         mSubmitButton = findViewById(R.id.updateDonationButton);
         mEditImageButton = findViewById(R.id.editDonationImageButton);
+        mCheckClaimsButton = findViewById(R.id.checkClaimsButton);
 
         Intent intent = getIntent();
         String path = intent.getExtras().getString("donated_item_id");
@@ -96,6 +97,17 @@ public class DonationDetailsActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(DonationDetailsActivity.this, "Document does not exist", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        mCheckClaimsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String title = mDonatedItemTitle.getText().toString();
+                Intent intent = new Intent(DonationDetailsActivity.this, CheckDonationClaimsActivity.class);
+                intent.putExtra("item_title", title);
+                intent.putExtra("path", path);
+                startActivity(intent);
             }
         });
 

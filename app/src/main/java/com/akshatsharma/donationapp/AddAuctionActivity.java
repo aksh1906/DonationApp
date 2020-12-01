@@ -44,7 +44,7 @@ import java.util.Map;
 
 public class AddAuctionActivity extends AppCompatActivity {
     ImageView mImageView;
-    Button mSubmitButton, mAddImageButton, mStartDateButton, mEndDateButton;
+    Button mSubmitButton, mAddImageButton, mEndDateButton;
     EditText mAuctionTitle, mAuctionDescription, mBidAmount;
     FirebaseFirestore fStore;
     FirebaseAuth fAuth;
@@ -57,7 +57,7 @@ public class AddAuctionActivity extends AppCompatActivity {
     Toolbar toolbar;
     int mYear, mMonth, mDay;
     int bidStartAmount;
-    Date startDate, endDate;
+    Date endDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +82,6 @@ public class AddAuctionActivity extends AppCompatActivity {
 
         mSubmitButton = findViewById(R.id.submitAuctionButton);
         mAddImageButton = findViewById(R.id.addAuctionImageButton);
-        mStartDateButton = findViewById(R.id.auctionStartDateButton);
         mEndDateButton = findViewById(R.id.auctionEndDateButton);
 
         mImageView = findViewById(R.id.auctionItemImageView);
@@ -101,24 +100,6 @@ public class AddAuctionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(openGalleryIntent, 1000);
-            }
-        });
-
-        mStartDateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(AddAuctionActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        mStartDateButton.setText(dayOfMonth + "/" + (month+1) + "/" + year);
-                    }
-                }, mYear, mMonth, mDay);
-                datePickerDialog.show();
             }
         });
 
@@ -150,10 +131,8 @@ public class AddAuctionActivity extends AppCompatActivity {
                 bidStartAmount = Integer.parseInt(mBidAmount.getText().toString());
 
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                String sDate = mStartDateButton.getText().toString();
                 String eDate = mEndDateButton.getText().toString();
                 try {
-                    startDate = formatter.parse(sDate);
                     endDate = formatter.parse(eDate);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -176,7 +155,6 @@ public class AddAuctionActivity extends AppCompatActivity {
                                 auction.put("image_url", downloadImageUri);
                                 auction.put("auctioned_status", 0);
                                 auction.put("bid_amount", bidStartAmount);
-                                auction.put("start_date", startDate);
                                 auction.put("end_date", endDate);
                                 auction.put("timestamp", FieldValue.serverTimestamp());
 
